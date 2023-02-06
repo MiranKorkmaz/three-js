@@ -17,8 +17,16 @@ const material = new THREE.MeshStandardMaterial({
 /* 
   Mesh is the combination 
   of geometry and material 
+  The scene adds the mesh
 */
 const mesh = new THREE.Mesh(geometry, material);
-
-// Adds in mesh to scene
 scene.add(mesh);
+
+/* 
+  Add Camera
+  It is basically what we see
+  First parameter: FOV (Field of view)
+  Second parameter: Aspect-ratio 
+*/
+const camera = new THREE.PerspectiveCamera(45, 800, 600);
+scene.add(camera);
