@@ -22,18 +22,26 @@ const material = new THREE.MeshStandardMaterial({
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
+/*
+  Add lights to see the globe
+
+*/
+const light = new THREE.PointLight(0xffffff, 1, 100);
+light.position.set(0, 10, 10);
+scene.add(light);
+
 /* 
   Add Camera
   It is basically what we see
   First parameter: FOV (Field of view)
   Second parameter: Aspect-ratio 
 */
-const camera = new THREE.PerspectiveCamera(45, 800, 600);
+const camera = new THREE.PerspectiveCamera(45, 800 / 600);
+camera.position.z = 20;
 scene.add(camera);
 
 // Renderer
 const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(800, 600);
-
 renderer.render(scene, camera);
