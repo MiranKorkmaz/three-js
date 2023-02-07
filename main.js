@@ -60,6 +60,13 @@ window.addEventListener("resize", () => {
   size.width = window.innerWidth
   size.height = window.innerHeight
   // Update camera 
+  camera.updateProjectionMatrix()
   camera.aspect = size.width / size.height
   renderer.setSize(size.width, size.height)
 });
+
+const loop = () => {
+  renderer.render(scene, camera)
+  window.requestAnimationFrame(loop)
+};
+loop();
