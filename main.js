@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import "./style.css";
 
 // New Scene (Imagine a movie set)
 const scene = new THREE.Scene();
@@ -52,3 +53,13 @@ const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(size.width, size.height);
 renderer.render(scene, camera);
+
+// Resize
+window.addEventListener("resize", () => {
+  // Update sizes
+  size.width = window.innerWidth
+  size.height = window.innerHeight
+  // Update camera 
+  camera.aspect = size.width / size.height
+  renderer.setSize(size.width, size.height)
+});
