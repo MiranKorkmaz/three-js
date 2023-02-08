@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import "./style.css";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // New Scene (Imagine a movie set)
 const scene = new THREE.Scene();
@@ -64,6 +65,9 @@ window.addEventListener("resize", () => {
   camera.aspect = size.width / size.height
   renderer.setSize(size.width, size.height)
 });
+
+// Control
+const control = new OrbitControls(camera, canvas);
 
 const loop = () => {
   renderer.render(scene, camera)
