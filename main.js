@@ -68,8 +68,10 @@ window.addEventListener("resize", () => {
 
 // Control
 const control = new OrbitControls(camera, canvas);
+control.enableDamping = true;
 
 const loop = () => {
+  control.update()
   renderer.render(scene, camera)
   window.requestAnimationFrame(loop)
 };
