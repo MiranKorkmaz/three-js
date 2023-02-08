@@ -69,6 +69,10 @@ window.addEventListener("resize", () => {
 // Control
 const control = new OrbitControls(camera, canvas);
 control.enableDamping = true;
+control.enableDamping = false;
+control.enableZoom = false;
+control.autoRotate = true;
+control.autoRotateSpeed = 5;
 
 const loop = () => {
   control.update()
