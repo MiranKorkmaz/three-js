@@ -25,3 +25,25 @@ nav {
   display: flex;
   justify-content: space-between;
 }
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+}
+
+.title {
+  color: white;
+  z-index: 2;
+  position: absolute;
+  font-size: 3rem;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -25%);
+}
