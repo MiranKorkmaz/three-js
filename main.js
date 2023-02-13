@@ -28,7 +28,7 @@ scene.add(mesh);
 // Size for screen
 const size = {
   width: window.innerWidth,
-  height: window.innerHeight
+  height: window.innerHeight,
 };
 
 /*
@@ -51,7 +51,7 @@ camera.position.z = 20;
 scene.add(camera);
 
 // Renderer
-const canvas = document.querySelector('.webgl');
+const canvas = document.querySelector(".webgl");
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(size.width, size.height);
 renderer.setPixelRatio(2);
@@ -60,12 +60,12 @@ renderer.render(scene, camera);
 // Resize
 window.addEventListener("resize", () => {
   // Update sizes
-  size.width = window.innerWidth
-  size.height = window.innerHeight
-  // Update camera 
-  camera.updateProjectionMatrix()
-  camera.aspect = size.width / size.height
-  renderer.setSize(size.width, size.height)
+  size.width = window.innerWidth;
+  size.height = window.innerHeight;
+  // Update camera
+  camera.updateProjectionMatrix();
+  camera.aspect = size.width / size.height;
+  renderer.setSize(size.width, size.height);
 });
 
 // Control
@@ -77,14 +77,36 @@ control.autoRotate = true;
 control.autoRotateSpeed = 5;
 
 const loop = () => {
-  control.update()
-  renderer.render(scene, camera)
-  window.requestAnimationFrame(loop)
+  control.update();
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(loop);
 };
 loop();
 
 // Timeline
-const tl = gsap.timeline({ defaults: { duration: 1} });
-tl.fromTo(mesh.scale, { z:0, x:0, y:0 }, { z:1, x:1, y:1});
-tl.fromTo('nav', { y: '-100%' }, { y: "0%" });
-tl.fromTo(".title", { opacity: 0 }, { opacity: 1});
+const tl = gsap.timeline({ defaults: { duration: 1 } });
+tl.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
+tl.fromTo("nav", { y: "-100%" }, { y: "0%" });
+tl.fromTo(".title", { opacity: 0 }, { opacity: 1 });
+
+// Mouse animation color
+let mouseDown = false;
+let rgb = [12, 23, 55];
+window.addEventListener("mousedown", () => (mouseDown = true));
+window.addEventListener("mouseup", () => (mouseup = false));
+
+window.addEventListener('mousemove', (e) => {
+  if (mouseDown) {
+    rgb = [
+      Math.round((e.pageX / size.height) * 255),
+      Math.round((e.pageY / size.height) * 255),
+      150,
+    ]
+    let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
+    gsap.to(mesh.material.color, { 
+      r: newColor.r,
+      g: newColor.g,
+      b: newColor.b
+    })
+  }
+});
